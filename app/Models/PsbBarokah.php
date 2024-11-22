@@ -36,4 +36,9 @@ class PsbBarokah extends Model
         'Keterangan',
         'Tenaga_Ahli'
     ];
+
+    public function keluhan()
+    {
+        return $this->hasMany(Keluhan::class, 'id_pelanggan', 'NUP_Id'); // Relasi ke kolom 'id_pelanggan' di Keluhan
+    }
 }

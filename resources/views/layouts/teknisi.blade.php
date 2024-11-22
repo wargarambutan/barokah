@@ -87,15 +87,21 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard') }}">
+                            <a href="{{ route('teknisi') }}">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::routeIs('psb-barokah.index') ? 'active' : '' }}">
-                            <a href="{{ route('psb-barokah.index') }}">
+                            <a href="{{ route('keluhan') }}">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                                 <p>Daftar Keluhan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::routeIs('psb-barokah.index') ? 'active' : '' }}">
+                            <a href="#">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <p>Keluhan Ditangani</p>
                             </a>
                         </li>
                     </ul>

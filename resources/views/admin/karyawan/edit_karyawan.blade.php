@@ -250,8 +250,8 @@
                             <option value="admin" {{ old('role', $karyawan->user->role) == 'admin' ? 'selected' : '' }}>
                                 Admin
                             </option>
-                            <option value="Teknisi"
-                                {{ old('role', $karyawan->user->role) == 'Teknisi' ? 'selected' : '' }}>
+                            <option value="teknisi"
+                                {{ old('role', $karyawan->user->role) == 'teknisi' ? 'selected' : '' }}>
                                 Teknisi
                             </option>
                         </select>

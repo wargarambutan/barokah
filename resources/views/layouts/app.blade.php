@@ -86,6 +86,16 @@
                     <a href="{{ route('index') }}" class="nav-item nav-link">Tentang</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link" data-bs-toggle="dropdown">
+                            <span class="dropdown-toggle">Keluhan</span>
+                        </a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{ route('ajukan-keluhan') }}" class="dropdown-item">Ajukan Keluhan</a>
+                            <a href="{{ route('cek-keluhan') }}" class="dropdown-item">Cek Keluhan</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Cek Tagihan</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-bs-toggle="dropdown">
                             <span class="dropdown-toggle">Daftar</span>
                         </a>
                         <div class="dropdown-menu m-0">
@@ -113,7 +123,8 @@
                     <div class="footer-item">
                         <a href="{{ route('index') }}" class="p-0">
                             {{-- <h4 class="text-white"><i class="fas fa-wifi me-3"></i>BarokahNet</h4> --}}
-                            <img src="img/logov.png" alt="Logo">
+                            <img src="{{ asset('img/logov.png') }}" alt="Logo"
+                                style="height: 100px !important; width: auto !important;">
                         </a>
                         <p class="mb-4">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit
                             amet, consectetur adipiscing...</p>

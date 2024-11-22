@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Keluhan;
 use App\Models\PsbBarokah;
 use Illuminate\Http\Request;
 
@@ -46,7 +46,7 @@ class PelangganController extends Controller
         // Membuat NUP_Id otomatis
         $lastNupId = PsbBarokah::max('NUP_Id'); // Ambil NUP_Id terakhir dari database
         $nextNupId = $lastNupId ? intval(substr($lastNupId, -5)) + 1 : 157; // Ambil nomor akhir dari NUP terakhir dan tambahkan 1
-        $newNupId = '150_552_' . str_pad($nextNupId, 5, '0', STR_PAD_LEFT); // Format NUP_Id baru
+        $newNupId = '150552_' . str_pad($nextNupId, 5, '0', STR_PAD_LEFT); // Format NUP_Id baru
 
         $pelanggan = new PsbBarokah();
         $pelanggan->NUP_Id = $newNupId;
@@ -82,5 +82,59 @@ class PelangganController extends Controller
         $pelanggan->save();
 
         return redirect()->route('pendaftaran-pelanggan')->with('success', 'Data pelanggan berhasil ditambahkan.');
+    }
+
+    public function keluhan()
+    {
+        return view('ajukan_keluhan');
+    }
+
+
+    public function ajukanKeluhan(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'id_pelanggan' => 'required|exists:psb_barokah,NUP_Id', // Validasi ID pelanggan harus ada di tabel psb_barokah
+            'keluhan' => 'required|string|max:255',                // Keluhan harus diisi, berupa string, maksimal 255 karakter
+        ]);
+
+        try {
+            // Simpan keluhan ke database
+            Keluhan::create([
+                'id_pelanggan' => $request->id_pelanggan, // Menghubungkan ke pelanggan berdasarkan ID
+                'keluhan' => $request->keluhan,           // Isi keluhan
+                'status' => 'Pending',                   // Status default adalah Pending
+                'id_teknisi' => null,                    // Belum ada teknisi yang menangani
+                'jenis_gangguan' => null,                // Opsional, bisa diisi null
+                'bentuk_tindakan' => null,               // Opsional, bisa diisi null
+            ]);
+
+            // Redirect ke halaman dengan pesan sukses
+            return redirect()->route('ajukan-keluhan')->with('success', 'Keluhan Anda berhasil diajukan.');
+        } catch (\Exception $e) {
+            // Handle error dan redirect dengan pesan error
+            return redirect()->route('ajukan-keluhan')->with('error', 'Terjadi kesalahan saat mengajukan keluhan.');
+        }
+    }
+
+
+    public function cekKeluhan(Request $request)
+    {
+        // Inisialisasi variabel keluhans dengan array kosong untuk default
+        $keluhans = collect();
+
+        // Jika ada input ID Pelanggan, cari data keluhan
+        if ($request->has('NUP_Id')) {
+            $request->validate([
+                'NUP_Id' => 'required|exists:keluhan,id_pelanggan',
+            ]);
+
+            $keluhans = Keluhan::where('id_pelanggan', $request->NUP_Id)
+                ->with(['teknisi', 'pelanggan']) // Eager load relasi jika diperlukan
+                ->get();
+        }
+
+        // Kembalikan ke view dengan data (defaultnya kosong)
+        return view('cek_keluhan', compact('keluhans'));
     }
 }

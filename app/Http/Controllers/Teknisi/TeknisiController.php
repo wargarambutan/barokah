@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teknisi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Keluhan;
 use Illuminate\Http\Request;
 
 class TeknisiController extends Controller
@@ -13,6 +14,15 @@ class TeknisiController extends Controller
     public function index()
     {
         return view('teknisi.index');
+    }
+
+    public function keluhan()
+    {
+        // Ambil semua data keluhan dari tabel
+        $keluhan = Keluhan::with(['pelanggan', 'teknisi'])->get(); // Gunakan relasi jika ada
+
+        // Kirim data ke view
+        return view('teknisi.keluhan', compact('keluhan'));
     }
 
     /**

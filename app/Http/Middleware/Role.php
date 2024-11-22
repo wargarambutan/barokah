@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdmin
+class Role
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
-        // Cek apakah user sudah login dan statusnya adalah admin
-        if (Auth::check() && Auth::user()->status === 'admin') {
+        // Cek apakah user sudah login dan rolenya adalah admin
+        if (Auth::check() && Auth::user()->role === $role) {
             return $next($request);  // Melanjutkan ke request berikutnya (route yang diminta)
         }
 

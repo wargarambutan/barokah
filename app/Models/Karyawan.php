@@ -37,4 +37,9 @@ class Karyawan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function keluhan()
+    {
+        return $this->hasMany(Keluhan::class, 'id_teknisi', 'id_karyawan'); // Relasi ke kolom 'id_teknisi' di Keluhan
+    }
 }

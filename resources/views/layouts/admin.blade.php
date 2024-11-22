@@ -39,7 +39,7 @@
 
         /* Jika perlu menyesuaikan posisi atau ukuran logo */
         .logo img {
-            height: 70px;
+            height: 40px;
             /* Menyesuaikan tinggi logo jika diperlukan */
         }
     </style>

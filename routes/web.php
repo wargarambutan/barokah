@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\KaryawanController;
-use App\Http\Controllers\Admin\PelangganController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\Admin\PsbBarokahController;
 use App\Http\Controllers\Admin\UserController;
@@ -30,11 +30,15 @@ Route::get('/view-pdf/{filename}', function ($filename) {
 
 Route::get('pendaftaran-pelanggan', [PelangganController::class, 'create'])->name('pendaftaran-pelanggan');
 Route::post('pendaftaran-pelanggan', [PelangganController::class, 'store'])->name('pendaftaran-pelanggan.store');
+Route::get('cek-keluhan', [PelangganController::class, 'cekKeluhan'])->name('cek-keluhan');
+Route::get('ajukan-keluhan', [PelangganController::class, 'keluhan'])->name('ajukan-keluhan');
+Route::post('ajukan-keluhan', [PelangganController::class, 'ajukanKeluhan'])->name('ajukan-keluhan.post');
+
 
 
 
 // Route Admin Barokah
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
     // Route Pendaftaran Karyawan
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('verifikasi-karyawan', [AdminController::class, 'verifikasi'])->name('verifikasi');
@@ -63,7 +67,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('user-barokah', UserController::class);
 });
 
-Route::get('teknisi-dashboard', [TeknisiController::class, 'index'])->name('teknisi-dashboard');
+
+
+// Route Teknisi
+Route::group(['middleware' => ['auth', 'role:teknisi']], function () {
+    Route::get('teknisi-dashboard', [TeknisiController::class, 'index'])->name('teknisi');
+    Route::get('daftar-keluhan', [TeknisiController::class, 'keluhan'])->name('keluhan');
+});
 
 
 
