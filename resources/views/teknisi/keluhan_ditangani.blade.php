@@ -3,24 +3,14 @@
 @section('content')
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
         <div>
-            <h3 class="fw-bold mb-3">Daftar Keluhan</h3>
+            <h3 class="fw-bold mb-3">Daftar Keluhan Ditangani</h3>
         </div>
     </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
 
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <table id="keluhan" class="display table table-striped table-hover">
                         <thead>
                             <tr>
@@ -55,16 +45,15 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <form action="{{ route('keluhan.ambilTugas', $data->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-primary btn-sm">Ambil Tugas</button>
-                                        </form>
+                                        <a class="btn btn-round btn-sm btn-primary"
+                                            href="{{ route('keluhan.edit', $data->id) }}">Lengkapi Data</a>
                                     </td>
+
                                 </tr>
                             @endforeach
                             @if ($keluhan->isEmpty())
                                 <tr>
-                                    <td colspan="7" class="text-center">Tidak ada data keluhan</td>
+                                    <td colspan="7" class="text-center">Tidak ada data keluhan yang sedang ditangani</td>
                                 </tr>
                             @endif
                         </tbody>

@@ -17,12 +17,8 @@
                             <div class="text-sm-center text-md-end">
                                 <h4 class="text-primary text-uppercase fw-bold mb-4">Selamat Datang Di BarokahNet
                                 </h4>
-                                <h1 class="display-4 text-uppercase text-white mb-4">Satu Langkah Menuju Karier
-                                    Impian Anda!
+                                <h1 class="display-4 text-uppercase text-white mb-4">Semoga Semakin Barokah
                                 </h1>
-                                <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy...
-                                </p>
                                 <div class="d-flex justify-content-center justify-content-md-end flex-shrink-0 mb-4">
                                     <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#"><i
                                             class="fas fa-play-circle me-2"></i> Watch Video</a>
@@ -57,8 +53,7 @@
                             <div class="text-center">
                                 <h4 class="text-primary text-uppercase fw-bold mb-4">Selamat Datang Di BarokahNet
                                 </h4>
-                                <h1 class="display-4 text-uppercase text-white mb-4">Satu Langkah Menuju Karier
-                                    Impian Anda!
+                                <h1 class="display-4 text-uppercase text-white mb-4">Semoga Semakin Barokah
                                 </h1>
                                 <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and
                                     typesetting industry. Lorem Ipsum has been the industry's standard dummy...

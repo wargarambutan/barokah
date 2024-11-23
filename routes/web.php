@@ -5,10 +5,12 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\KaryawanController;
+use App\Http\Controllers\Admin\KeluhanPelangganController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\Admin\PsbBarokahController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\SesiController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Teknisi\TeknisiController;
 
@@ -64,7 +66,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('psb-barokah/{id}/cetak-id-card', [PsbBarokahController::class, 'cetakIdCard'])->name('psb-barokah.cetakIdCard');
     // Route Karyawan Barokah
     Route::resource('karyawan-barokah', KaryawanController::class);
-    Route::resource('user-barokah', UserController::class);
+    Route::get('keluhan-pelanggan', [KeluhanPelangganController::class, 'index']);
 });
 
 
@@ -73,6 +75,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 Route::group(['middleware' => ['auth', 'role:teknisi']], function () {
     Route::get('teknisi-dashboard', [TeknisiController::class, 'index'])->name('teknisi');
     Route::get('daftar-keluhan', [TeknisiController::class, 'keluhan'])->name('keluhan');
+    Route::get('daftar-keluhan-ditangani', [TeknisiController::class, 'keluhanDitangani'])->name('ditangani');
+    Route::post('ambil-tugas/{keluhan}', [TeknisiController::class, 'ambilTugas'])->name('keluhan.ambilTugas');
+    Route::get('keluhan/{id}/edit', [TeknisiController::class, 'editKeluhan'])->name('keluhan.edit');
+    Route::post('keluhan/{id}/update', [TeknisiController::class, 'updateKeluhan'])->name('keluhan.update');
 });
 
 
@@ -87,13 +93,9 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 // Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
 // Rute untuk mengirimkan form login
-Route::post('login', [LoginController::class, 'login']);
-
+Route::middleware(['guest'])->group(function () {
+    Route::get('login', [SesiController::class, 'index'])->name('login');
+    Route::post('login', [SesiController::class, 'login']);
+});
 // Rute untuk logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::middleware('guest')->get('login', [LoginController::class, 'showLoginForm'])->name('login');
-
-Route::get('/kartu-identitas', function () {
-    return view('kartu');
-});

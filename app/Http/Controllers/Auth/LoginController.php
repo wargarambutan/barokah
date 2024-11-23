@@ -53,17 +53,6 @@ class LoginController extends Controller
         return [];
     }
 
-    // protected function resetPassword($user, $password)
-    // {
-    //     // Update password user
-    //     $user->password = bcrypt($password);
-    //     $user->setRememberToken(Str::random(60));
-
-    //     // Simpan perubahan
-    //     $user->save();
-
-    //     // Tidak ada login otomatis di sini
-    // }
 
     /**
      * Mengarahkan pengguna kembali ke halaman login jika login gagal.

@@ -5,12 +5,16 @@
 @section('content')
 
     <!-- Form Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid full-page">
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-xl-12 wow fadeInLeft" data-wow-delay="0.2s">
                     <div>
                         <h1 class="display-6 mb-2">Silahkan Laporkan Keluhan Anda</h1>
+                        <div class="col-6 mt-0">
+                            <a href="{{ route('cek-keluhan') }}" class="btn btn-secondary rounded-pill py-2 px-4">Cek
+                                Keluhan</a>
+                        </div>
                         @if (session('success'))
                             <div class="alert alert-success mt-4">
                                 {{ session('success') }}
@@ -40,7 +44,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="keluhan" class="form-label">Isi Keluhan</label>
-                                    <input type="text" class="form-control" id="keluhan" name="keluhan" required>
+                                    <select class="form-control" id="keluhan" name="keluhan" required>
+                                        <option value="Tidak ada koneksi internet">Tidak ada koneksi internet</option>
+                                        <option value="Lampu merah/lost">Lampu merah/lost</option>
+                                        <option value="Kabel putus">Kabel putus</option>
+                                        <option value="Koneksi lambat">Koneksi lambat</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12 mt-4">

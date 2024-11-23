@@ -62,8 +62,8 @@
                                     <td>{{ $keluhan->id_pelanggan }}</td>
                                     <td>{{ $keluhan->keluhan }}</td>
                                     <td>
-                                        @if ($keluhan->teknisi)
-                                            {{ $keluhan->teknisi->nama }}
+                                        @if ($keluhan->teknisi->user->name)
+                                            {{ $keluhan->teknisi->user->name }}
                                         @else
                                             <span class="text-muted">Belum Ditangani</span>
                                         @endif

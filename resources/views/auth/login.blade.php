@@ -2,6 +2,11 @@
 
 @section('content')
     <!-- Formulir login -->
+    @if ($errors->any())
+        <div class="alert alert-danger mt-3">
+            <strong>{{ $errors->first() }}</strong>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('login') }}" class="pt-3">
         @csrf

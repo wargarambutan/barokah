@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item {{ Request::routeIs('psb-barokah.index') ? 'active' : '' }}">
-                            <a href="#">
+                            <a href="{{ route('ditangani') }}">
                                 <i class="fa-solid fa-screwdriver-wrench"></i>
                                 <p>Keluhan Ditangani</p>
                             </a>
@@ -290,7 +290,7 @@
                                     </div>
                                     <span class="profile-username">
                                         <span class="op-7">Hi,</span>
-                                        <span class="fw-bold"></span>
+                                        <span class="fw-bold">{{ auth()->user()->name }}</span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -302,8 +302,8 @@
                                                         alt="image profile" class="avatar-img rounded" />
                                                 </div>
                                                 <div class="u-text">
-                                                    <h4></h4>
-                                                    <p class="text-muted"></p>
+                                                    <h4>{{ auth()->user()->name }}</h4>
+                                                    <p class="text-muted">{{ auth()->user()->email }}</p>
                                                 </div>
                                             </div>
                                         </li>
